@@ -57,6 +57,7 @@ run brew bundle -v --file=- <<-EOF
   cask "rectangle"
   cask "iterm2"
   cask "flux"
+  cask "ngrok"
 EOF
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
