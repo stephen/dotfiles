@@ -9,13 +9,6 @@ Linux) OS=linux ;;
 *) echo "Unsupport OS $(uname -s)"; exit 1 ;;
 esac
 
-git config --global user.email "stephen@stephenwan.com"
-git config --global user.name "Stephen Wan"
-
-if [[ ! -f ~/.ssh/id_rsa ]]; then
-	ssh-keygen -t rsa -b 4096 -C "stephen@stephenwan.com" -P "" -f ~/.ssh/id_rsa
-fi
-
 # run echoes and runs.
 run() {
   echo "$@" && GO111MODULE="$GO111MODULE" "$@"
@@ -42,6 +35,13 @@ if ! which brew >/dev/null 2>&1; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
+git config --global user.email "stephen@stephenwan.com"
+git config --global user.name "Stephen Wan"
+
+if [[ ! -f ~/.ssh/id_rsa ]]; then
+	ssh-keygen -t rsa -b 4096 -C "stephen@stephenwan.com" -P "" -f ~/.ssh/id_rsa
+fi
+
 echo Installing apps from homebrew...
 run brew update
 run brew bundle -v --file=- <<-EOF
@@ -65,7 +65,9 @@ run brew bundle -v --file=- <<-EOF
   cask "ngrok"
 EOF
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+if ! which zsh ; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
 
 echo Checking for fzf...
 if ! which fzf ; then
