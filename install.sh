@@ -27,6 +27,7 @@ defaults write -g KeyRepeat -int 1
 # Dock
 defaults write com.apple.dock persistent-apps -array
 defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock show-recents -bool FALSE
 
 # brew installation will also add basic xcode tools (git).
 echo Checking if brew installed...
