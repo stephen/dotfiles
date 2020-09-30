@@ -1,0 +1,42 @@
+[user]
+	email = stephen@stephenwan.com
+	name = Stephen Wan
+
+[branch "master"]
+	rebase = true
+
+[alias]
+	l = log master..
+	cd = "!d=\"$(gdate -d \"$1\")\" && shift && GIT_COMMITTER_DATE=\"$d\" git commit --amend --date \"$d\""
+	co = checkout
+	st = status
+	gr = log --graph --pretty=oneline
+	lg = log --pretty=oneline
+	f = fetch --all
+	rb = rebase
+	rom = rebase origin/master --allow-empty-message
+	fix = commit --amend -v
+	b = checkout -b
+	dh = diff head
+	ds = diff --staged
+	cp = cherry-pick
+	tmp = commit -m 'XXX: temporary commit'
+	c = commit -v
+	rt = rebase --ignore-date origin/master
+	a = add
+	rf = reflog --date=iso
+
+[core]
+	pager = less -x 3,5
+	editor = vim
+	excludesfile = /Users/stephen/.gitignore_global
+
+[rebase]
+	autoStash = true
+
+[pull]
+	rebase = true
+
+[merge "ours"]
+	driver = true
+
