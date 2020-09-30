@@ -1,0 +1,29 @@
+#!/bin/bash
+# from `~/checkout/backend`
+gitwd="$(git remote get-url origin 2>&1)"
+
+if [ "$gitwd" != "git@github.com:samsara-dev/backend.git" ]; then
+  echo "error: cd into your local /backend checkout first (i.e. cd ~/co/backend)"
+  exit 1
+fi
+
+
+thunder_vendor=./go/src/samsaradev.io/vendor/github.com/samsarahq/thunder
+thunder_files="$(git ls-files $thunder_vendor | tr '\n' ' ')"
+if [ -L $thunder_vendor ]; then
+  git reset -- $thunder_vendor > /dev/null
+  git co -- $thunder_vendor > /dev/null
+  git update-index --no-assume-unchanged $thunder_files
+  echo "i unvendored local thunder. have a great day!"
+else
+  mkdir -p ./go/src/github.com/samsarahq/
+  if [ ! -d "./go/src/github.com/samsarahq/thunder/" ]; then
+    echo "let me grab your thunder..."
+    git clone git@github.com:samsarahq/thunder.git ./go/src/github.com/samsarahq/thunder/
+  fi
+  rm -rf $thunder_vendor
+  ln -s ../../../../github.com/samsarahq/thunder/ ./go/src/samsaradev.io/vendor/github.com/samsarahq
+  git update-index --assume-unchanged $thunder_files
+  echo "i vendored local thunder. make sure to unvendor later!"
+  # at this point, your git working directory is going to be a mess. please ignore
+fi

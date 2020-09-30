@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Set the working directory to where the file is.
+cd "$(dirname "$0")" || return
+
 case $(uname -s) in
 Darwin) OS=darwin ;;
 Linux) OS=linux ;;
@@ -53,6 +56,8 @@ run brew bundle -v --file=- <<-EOF
   brew "mosh"
   brew "watchman"
   brew "mas"
+  brew "coreutils"
+  brew "fasd"
   cask "visual-studio-code"
   cask "rectangle"
   cask "iterm2"
@@ -75,5 +80,7 @@ run mas install 775737590 # ia writer
 run mas install 425424353 # unarchiver
 
 echo Symlinking configurations into home...
-run ln -fsv ~/git/dotfiles/config/com.knollsoft.Rectangle.plist ~/Library/Preferences/
-run ln -fsv ~/git/dotfiles/.gitconfig ~
+run ln -fsv "$(greadlink -f ./configs/com.knollsoft.Rectangle.plist)" ~/Library/Preferences/
+run ln -fsv "$(greadlink -f .gitconfig)" ~
+run ln -fsv "$(greadlink -f ./configs/.zshrc)" ~
+run ln -fsv "$(greadlink -f ./bin)" ~

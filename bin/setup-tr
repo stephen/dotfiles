@@ -1,0 +1,29 @@
+#!/bin/bash
+# from `~/checkout/backend`
+gitwd="$(git remote get-url origin 2>&1)"
+
+if [ "$gitwd" != "git@github.com:samsara-dev/backend.git" ]; then
+  echo "error: cd into your local /backend checkout first (i.e. cd ~/co/backend)"
+  exit 1
+fi
+
+
+taskrunner_vendor=./go/src/samsaradev.io/vendor/github.com/samsarahq/taskrunner
+taskrunner_files="$(git ls-files $taskrunner_vendor | tr '\n' ' ')"
+if [ -L $taskrunner_vendor ]; then
+  git reset -- $taskrunner_vendor > /dev/null
+  git co -- $taskrunner_vendor > /dev/null
+  git update-index --no-assume-unchanged $taskrunner_files
+  echo "i unvendored local taskrunner. have a great day!"
+else
+  mkdir -p ./go/src/github.com/samsarahq/
+  if [ ! -d "./go/src/github.com/samsarahq/taskrunner/" ]; then
+    echo "let me grab your taskrunner..."
+    git clone git@github.com:samsarahq/taskrunner.git ./go/src/github.com/samsarahq/taskrunner/
+  fi
+  rm -rf $taskrunner_vendor
+  ln -s ../../../../github.com/samsarahq/taskrunner/ ./go/src/samsaradev.io/vendor/github.com/samsarahq
+  git update-index --assume-unchanged $taskrunner_files
+  echo "i vendored local taskrunner. make sure to unvendor later!"
+  # at this point, your git working directory is going to be a mess. please ignore
+fi
