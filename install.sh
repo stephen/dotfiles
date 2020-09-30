@@ -19,10 +19,16 @@ run() {
 }
 
 echo Setting up mac defaults...
+# Pointer
 defaults write -g com.apple.trackpad.scaling 0.875
 defaults write -g com.apple.mouse.scaling -1
+
+# Keyboard
+defaults write -g ApplePressAndHoldEnabled -bool false
 defaults write -g InitialKeyRepeat -int 15
 defaults write -g KeyRepeat -int 1
+
+# Dock
 defaults write com.apple.dock persistent-apps -array
 defaults write com.apple.dock autohide -bool true
 
