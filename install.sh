@@ -42,6 +42,12 @@ fi
 echo Installing apps from homebrew...
 run brew update
 run brew bundle -v --file=- <<-EOF
+  tap "homebrew/cask-versions"
+  cask "google-chrome-canary"
+
+  tap "spotify/public"
+  cask "spotify"
+
   brew "direnv"
   brew "git"
   brew "mosh"
