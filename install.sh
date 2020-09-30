@@ -84,3 +84,7 @@ run ln -fsv "$(greadlink -f ./configs/com.knollsoft.Rectangle.plist)" ~/Library/
 run ln -fsv "$(greadlink -f .gitconfig)" ~
 run ln -fsv "$(greadlink -f ./configs/.zshrc)" ~
 run ln -fsv "$(greadlink -f ./bin)" ~
+
+# Setup iterm2
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$HOME/git/dotfiles/configs/iterm2"
+defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
