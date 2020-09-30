@@ -74,4 +74,5 @@ run mas install 775737590 # ia writer
 run mas install 425424353 # unarchiver
 
 echo Symlinking configurations into home...
+run ln -fsv ~/git/dotfiles/config/com.knollsoft.Rectangle.plist ~/Library/Preferences/
 run ln -fsv ~/git/dotfiles/.gitconfig ~
