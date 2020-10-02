@@ -14,6 +14,9 @@ run() {
   echo "$@" && "$@"
 }
 
+git config --global user.email "stephen@stephenwan.com"
+git config --global user.name "Stephen Wan"
+
 case $OS in
 darwin)
 echo Setting up mac defaults...
@@ -40,9 +43,6 @@ if ! which brew >/dev/null 2>&1; then
   echo Installing brew.
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
-
-git config --global user.email "stephen@stephenwan.com"
-git config --global user.name "Stephen Wan"
 
 if [[ ! -f ~/.ssh/id_rsa ]]; then
 	ssh-keygen -t rsa -b 4096 -C "stephen@stephenwan.com" -P "" -f ~/.ssh/id_rsa
@@ -76,6 +76,14 @@ echo Installing apps from Mac App Store...
 run mas install 1451685025 # wireguard
 run mas install 775737590 # ia writer
 run mas install 425424353 # unarchiver
+;;
+linux)
+
+run sudo apt-get update
+run sudo apt-get install -y \
+  mosh \
+  zsh
+
 esac
 
 if ! which zsh ; then
@@ -100,4 +108,9 @@ run ln -fsv "$(greadlink -f ./bin)" ~
 # Setup iterm2
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$HOME/git/dotfiles/configs/iterm2"
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+
+;;
+linux)
+
+
 esac
