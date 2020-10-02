@@ -82,7 +82,8 @@ linux)
 run sudo apt-get update
 run sudo apt-get install -y \
   mosh \
-  zsh
+  zsh \
+  tmux
 
 esac
 
@@ -90,12 +91,9 @@ if ! which zsh ; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
-echo Checking for fzf...
-if ! which fzf ; then
-  echo Installing fzf...
-  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-  ~/.fzf/install --all
-fi
+echo Installing fzf...
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install --all
 
 echo Symlinking configurations into home...
 case $OS in
