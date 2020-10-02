@@ -92,6 +92,7 @@ echo Symlinking configurations into home...
 case $OS in
 darwin)
 run ln -fsv "$(greadlink -f ./configs/com.knollsoft.Rectangle.plist)" ~/Library/Preferences/
+run ln -fsv "$(greadlink -f .gitconfig)" ~
 run ln -fsv "$(greadlink -f ./configs/.zshrc)" ~
 run ln -fsv "$(greadlink -f ./bin)" ~
 
