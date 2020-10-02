@@ -112,5 +112,8 @@ defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 ;;
 linux)
 
+run ln -fsv "$(readlink -f .gitconfig)" ~
+run ln -fsv "$(readlink -f ./.zshrc)" ~
+run ln -fsv "$(readlink -f ./bin)" ~
 
 esac
