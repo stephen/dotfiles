@@ -11,9 +11,11 @@ esac
 
 # run echoes and runs.
 run() {
-  echo "$@" && GO111MODULE="$GO111MODULE" "$@"
+  echo "$@" && "$@"
 }
 
+case $OS in
+darwin)
 echo Setting up mac defaults...
 # Pointer
 defaults write -g com.apple.trackpad.scaling 0.875
@@ -69,6 +71,12 @@ run brew bundle -v --file=- <<-EOF
   cask "ngrok"
 EOF
 
+echo Installing apps from Mac App Store...
+run mas install 1451685025 # wireguard
+run mas install 775737590 # ia writer
+run mas install 425424353 # unarchiver
+esac
+
 if ! which zsh ; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
@@ -80,17 +88,14 @@ if ! which fzf ; then
   ~/.fzf/install --all
 fi
 
-echo Installing apps from Mac App Store...
-run mas install 1451685025 # wireguard
-run mas install 775737590 # ia writer
-run mas install 425424353 # unarchiver
-
 echo Symlinking configurations into home...
+case $OS in
+darwin)
 run ln -fsv "$(greadlink -f ./configs/com.knollsoft.Rectangle.plist)" ~/Library/Preferences/
-run ln -fsv "$(greadlink -f .gitconfig)" ~
 run ln -fsv "$(greadlink -f ./configs/.zshrc)" ~
 run ln -fsv "$(greadlink -f ./bin)" ~
 
 # Setup iterm2
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$HOME/git/dotfiles/configs/iterm2"
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+esac
