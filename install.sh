@@ -29,6 +29,9 @@ defaults write com.apple.dock persistent-apps -array
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock show-recents -bool FALSE
 
+# Keyboard
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3 # Support tabbing between any controls.
+
 # brew installation will also add basic xcode tools (git).
 echo Checking if brew installed...
 if ! which brew >/dev/null 2>&1; then

@@ -102,3 +102,4 @@ source $ZSH/oh-my-zsh.sh
 export PATH="$HOME/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(direnv hook zsh)"
