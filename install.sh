@@ -69,6 +69,7 @@ run brew bundle -v --file=- <<-EOF
   cask "iterm2"
   cask "flux"
   cask "ngrok"
+  cask "licecap"
 EOF
 
 echo Installing apps from Mac App Store...
