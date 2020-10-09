@@ -87,7 +87,8 @@ run sudo apt-get install -y \
 
 esac
 
-if ! which zsh ; then
+
+if [[ ! -d ~/.oh-my-zsh ]]; then
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
@@ -111,7 +112,6 @@ defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 linux)
 
 run ln -fsv "$(readlink -f .gitconfig)" ~
-run ln -fsv "$(readlink -f ./.zshrc)" ~
 run ln -fsv "$(readlink -f ./bin)" ~
 
 esac
