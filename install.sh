@@ -83,7 +83,8 @@ run sudo apt-get update
 run sudo apt-get install -y \
   mosh \
   zsh \
-  tmux
+  tmux \
+  fasd
 
 esac
 
