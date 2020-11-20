@@ -79,12 +79,16 @@ run mas install 425424353 # unarchiver
 ;;
 linux)
 
+curl -fsSL https://pkgs.tailscale.com/stable/debian/buster.gpg | sudo apt-key add -
+curl -fsSL https://pkgs.tailscale.com/stable/debian/buster.list | sudo tee /etc/apt/sources.list.d/tailscale.list
+
 run sudo apt-get update
 run sudo apt-get install -y \
   mosh \
   zsh \
   tmux \
-  fasd
+  fasd \
+  tailscale
 
 esac
 
