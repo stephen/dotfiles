@@ -76,6 +76,7 @@ echo Installing apps from Mac App Store...
 run mas install 1451685025 # wireguard
 run mas install 775737590 # ia writer
 run mas install 425424353 # unarchiver
+run mas install 1475387142 # tailscale
 ;;
 linux)
 
