@@ -42,6 +42,8 @@ echo Checking if brew installed...
 if ! which brew >/dev/null 2>&1; then
   echo Installing brew.
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/stephen/.zprofile
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 if [[ ! -f ~/.ssh/id_rsa ]]; then
