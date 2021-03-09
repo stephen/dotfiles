@@ -59,6 +59,7 @@ run brew bundle -v --file=- <<-EOF
   tap "spotify/public"
   cask "spotify"
 
+  brew "golang"
   brew "direnv"
   brew "git"
   brew "mosh"
