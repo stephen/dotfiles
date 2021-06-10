@@ -64,6 +64,7 @@ run brew bundle -v --file=- <<-EOF
   brew "git"
   brew "mosh"
   brew "watchman"
+  brew "jq"
   brew "mas"
   brew "coreutils"
   brew "fasd"
