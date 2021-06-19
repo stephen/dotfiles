@@ -17,7 +17,7 @@
 	rom = rebase origin/master --allow-empty-message
 	fix = commit --amend -v
 	b = checkout -b
-	dh = diff head
+	dh = diff HEAD
 	ds = diff --staged
 	cp = cherry-pick
 	tmp = commit -m 'XXX: temporary commit'
