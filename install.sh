@@ -68,6 +68,7 @@ run brew bundle -v --file=- <<-EOF
   brew "mas"
   brew "coreutils"
   brew "fasd"
+  cask "vlc"
   cask "visual-studio-code"
   cask "rectangle"
   cask "iterm2"
