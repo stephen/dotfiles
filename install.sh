@@ -61,6 +61,7 @@ run brew bundle -v --file=- <<-EOF
   cask "spotify"
 
   brew "golang"
+  brew "node"
   brew "direnv"
   brew "git"
   brew "mosh"
@@ -69,6 +70,7 @@ run brew bundle -v --file=- <<-EOF
   brew "mas"
   brew "coreutils"
   brew "fasd"
+  cask "docker"
   cask "lunar"
   cask "shifty"
   cask "vlc"
