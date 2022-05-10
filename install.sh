@@ -26,6 +26,7 @@ defaults write -g com.apple.mouse.scaling -1
 
 # Keyboard
 defaults write -g ApplePressAndHoldEnabled -bool false
+defaults write -g NSWindowShouldDragOnGesture -bool true
 defaults write -g InitialKeyRepeat -int 15
 defaults write -g KeyRepeat -int 1
 
@@ -68,6 +69,8 @@ run brew bundle -v --file=- <<-EOF
   brew "mas"
   brew "coreutils"
   brew "fasd"
+  cask "lunar"
+  cask "shifty"
   cask "vlc"
   cask "visual-studio-code"
   cask "rectangle"
