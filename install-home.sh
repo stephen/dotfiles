@@ -10,7 +10,15 @@ run brew bundle -v --file=- <<-EOF
   cask "plex-media-server"
 EOF
 
-# --restart helps keep it alive
-docker pull pihole/pihole
-docker run -d --name pihole -e ServerIP=$(ipconfig getifaddr en0) -e WEBPASSWORD="password" -e DNS1=8.8.8.8 -p 80:80 -p 53:53/tcp -p 53:53/udp -p 443:443 --restart always pihole/pihole:latest
+
+WYZE_PASSWORD=
+
+# -n is no-clobber
+cp -n ./configs/.env.sample ~/.env
+read -p "Populate ~/.env with secrets. Press any key to begin..."
+vim ~/.env
+
+# pi-hole
+set -a
+source ~/.env && export SERVER_IP=$(ipconfig getifaddr en0) && docker-compose -f ./configs/docker-compose.yml up -d
 networksetup -setdnsservers Ethernet 127.0.0.1

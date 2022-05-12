@@ -1,0 +1,26 @@
+version: '3.3'
+services:
+    pihole:
+        container_name: pihole
+        environment:
+            - ServerIP=${SERVER_IP}
+            - WEBPASSWORD=password
+            - DNS1=8.8.8.8
+        ports:
+            - '80:80' # web
+            - '53:53/tcp' # dns
+            - '53:53/udp' # dns
+            - '443:443' # secure web
+        restart: unless-stopped
+        image: 'pihole/pihole:latest'
+    wyze-bridge:
+        container_name: wyze-bridge
+        restart: unless-stopped
+        image: mrlt8/wyze-bridge:latest
+        ports:
+            - 1935:1935 # RTMP
+            - 8554:8554 # RTSP
+            - 8888:8888 # HLS
+        environment:
+            - WYZE_EMAIL=${WYZE_EMAIL}
+            - WYZE_PASSWORD=${WYZE_PASSWORD}
