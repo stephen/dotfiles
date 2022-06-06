@@ -73,6 +73,7 @@ run brew bundle -v --file=- <<-EOF
   cask "docker"
   cask "lunar"
   cask "shifty"
+  brew "ctop"
   cask "vlc"
   cask "visual-studio-code"
   cask "rectangle"
