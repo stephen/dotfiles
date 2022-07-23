@@ -1,0 +1,3 @@
+#!/bin/bash
+
+git log --grep "XXX: " --pretty=format:"%h" | fzf --preview 'git show --color {}' --preview-window up,75%
