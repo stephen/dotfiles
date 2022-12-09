@@ -57,6 +57,8 @@ run brew bundle -v --file=- <<-EOF
   tap "homebrew/cask-versions"
   cask "google-chrome-canary"
 
+  cask "unnaturalscrollwheels"
+
   tap "spotify/public"
   cask "spotify"
 
