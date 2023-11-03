@@ -62,6 +62,8 @@ run brew bundle -v --file=- <<-EOF
   tap "spotify/public"
   cask "spotify"
 
+  brew "lnav"
+  brew "stripe/stripe-cli/stripe"
   brew "golang"
   brew "node"
   brew "direnv"
