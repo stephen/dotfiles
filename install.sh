@@ -140,4 +140,7 @@ linux)
 run ln -fsv "$(readlink -f .gitconfig)" ~
 run ln -fsv "$(readlink -f ./bin-dotfiles)" ~
 
+run git remote remove origin
+run git remote add origin git@github.com:stephen/dotfiles.git
+
 esac
