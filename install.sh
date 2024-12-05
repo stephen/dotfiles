@@ -63,6 +63,8 @@ run brew bundle -v --file=- <<-EOF
   tap "spotify/public"
   cask "spotify"
 
+  cask "google-chrome"
+
   brew "lnav"
   brew "stripe/stripe-cli/stripe"
   brew "golang"
