@@ -21,13 +21,15 @@ case $OS in
 darwin)
 echo Setting up mac defaults...
 # Pointer
+sudo xcodebuild -license accept
+
 defaults write -g com.apple.trackpad.scaling 0.875
 defaults write -g com.apple.mouse.scaling -1
 
 # Keyboard
 defaults write -g ApplePressAndHoldEnabled -bool false
 defaults write -g NSWindowShouldDragOnGesture -bool true
-defaults write -g InitialKeyRepeat -int 15
+defaults write -g InitialKeyRepeat -int 10
 defaults write -g KeyRepeat -int 1
 
 # Dock
@@ -51,12 +53,11 @@ if [[ ! -f ~/.ssh/id_rsa ]]; then
 	ssh-keygen -t rsa -b 4096 -C "stephen@stephenwan.com" -P "" -f ~/.ssh/id_rsa
 fi
 
+mkdir -p ~/bin/
+
 echo Installing apps from homebrew...
 run brew update
 run brew bundle -v --file=- <<-EOF
-  tap "homebrew/cask-versions"
-  cask "google-chrome-canary"
-
   cask "unnaturalscrollwheels"
 
   tap "spotify/public"
@@ -73,7 +74,6 @@ run brew bundle -v --file=- <<-EOF
   brew "jq"
   brew "mas"
   brew "coreutils"
-  brew "fasd"
   cask "docker"
   cask "lunar"
   cask "shifty"
@@ -124,16 +124,20 @@ darwin)
 run ln -fsv "$(greadlink -f ./configs/com.knollsoft.Rectangle.plist)" ~/Library/Preferences/
 run ln -fsv "$(greadlink -f .gitconfig)" ~
 run ln -fsv "$(greadlink -f ./configs/.zshrc)" ~
-run ln -fsv "$(greadlink -f ./bin)" ~
+run ln -fsv "$(greadlink -f ./bin)" ~/bin-dotfiles
 
-# Setup iterm2
-defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$HOME/git/dotfiles/configs/iterm2"
-defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+if ! which fasd >/dev/null 2>&1; then
+  git clone --depth 1 https://github.com/clvv/fasd.git ~/.fasd-src
+  run pushd ~/.fasd-src || exit
+  PREFIX=. run make install
+  run mv ~/.fasd-src/bin/fasd ~/bin/fasd
+  run popd || exit
+fi
 
 ;;
 linux)
 
 run ln -fsv "$(readlink -f .gitconfig)" ~
-run ln -fsv "$(readlink -f ./bin)" ~
+run ln -fsv "$(readlink -f ./bin-dotfiles)" ~
 
 esac
