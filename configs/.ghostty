@@ -1,0 +1,26 @@
+
+keybind = super+left=goto_split:left
+keybind = super+down=goto_split:bottom
+keybind = super+right=goto_split:right
+keybind = super+up=goto_split:top
+
+keybind = super+b=toggle_quick_terminal
+
+theme = "Monokai Vivid"
+
+cursor-style = block
+# background-opacity = .95
+# background-blur-radius = 20
+unfocused-split-opacity = .5
+window-padding-x = 20
+window-padding-y = 20
+
+window-colorspace = display-p3
+
+quick-terminal-position = bottom
+quick-terminal-animation-duration = .1
+
+macos-icon = custom-style
+macos-icon-screen-color = black
+macos-icon-ghost-color = white
+macos-icon-frame = aluminum

@@ -66,6 +66,7 @@ run brew bundle -v --file=- <<-EOF
   cask "google-chrome"
 
   brew "lnav"
+  brew "ghostty"
   brew "stripe/stripe-cli/stripe"
   brew "golang"
   brew "node"
@@ -121,8 +122,13 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install --all
 
 echo Symlinking configurations into home...
+
+mkdir -p ~/.config/ghostty/
+run ln -fsv "$(greadlink -f ./configs/.ghostty)" ~/.config/ghostty/config
+
 case $OS in
 darwin)
+
 run ln -fsv "$(greadlink -f ./configs/com.knollsoft.Rectangle.plist)" ~/Library/Preferences/
 run ln -fsv "$(greadlink -f .gitconfig)" ~
 run ln -fsv "$(greadlink -f ./configs/.zshrc)" ~
