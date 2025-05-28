@@ -17,6 +17,10 @@ run() {
 git config --global user.email "stephen@stephenwan.com"
 git config --global user.name "Stephen Wan"
 
+if [[ ! -f ~/.ssh/id_rsa ]]; then
+	ssh-keygen -t rsa -b 4096 -C "stephen@stephenwan.com" -P "" -f ~/.ssh/id_rsa
+fi
+
 case $OS in
 darwin)
 echo Setting up mac defaults...
@@ -47,10 +51,6 @@ if ! which brew >/dev/null 2>&1; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
   echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/stephen/.zprofile
   eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
-if [[ ! -f ~/.ssh/id_rsa ]]; then
-	ssh-keygen -t rsa -b 4096 -C "stephen@stephenwan.com" -P "" -f ~/.ssh/id_rsa
 fi
 
 mkdir -p ~/bin/
