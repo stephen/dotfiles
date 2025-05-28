@@ -6,7 +6,7 @@ keybind = super+up=goto_split:top
 
 keybind = super+b=toggle_quick_terminal
 
-theme = "Monokai Vivid"
+theme = "Monokai Soda"
 
 cursor-style = block
 # background-opacity = .95
