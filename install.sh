@@ -121,6 +121,9 @@ echo Installing fzf...
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install --all
 
+echo Installing uv...
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
 echo Symlinking configurations into home...
 
 mkdir -p ~/.config/ghostty/
