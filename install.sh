@@ -21,6 +21,29 @@ if [[ ! -f ~/.ssh/id_rsa ]]; then
 	ssh-keygen -t rsa -b 4096 -C "stephen@stephenwan.com" -P "" -f ~/.ssh/id_rsa
 fi
 
+mkdir -p "$(dirname "$SSH_CONFIG_FILE")"
+SSH_CONFIG_FILE="$HOME/.ssh/config"
+touch $SSH_CONFIG_FILE
+if ! grep -q "^AddKeysToAgent" "$SSH_CONFIG_FILE"; then
+   temp_file=$(mktemp)
+   echo "AddKeysToAgent yes" > "$temp_file"
+
+   case $OSTYPE in
+   darwin*)
+       echo "UseKeychain yes" >> "$temp_file"
+       ;;
+   esac
+
+   echo "" >> "$temp_file"
+
+   cat "$SSH_CONFIG_FILE" >> "$temp_file"
+   mv "$temp_file" "$SSH_CONFIG_FILE"
+
+   echo "Added SSH agent configuration to ~/.ssh/config"
+else
+   echo "AddKeysToAgent already configured in ~/.ssh/config"
+fi
+
 case $OS in
 darwin)
 echo Setting up mac defaults...
