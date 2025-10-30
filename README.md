@@ -6,8 +6,9 @@ git clone https://github.com/stephen/dotfiles.git
 ```
 
 ## Other manual followup
-- Install [cursorsense](https://plentycom.jp/en/cursorsense/download.php)
+- Set CursorSense settings:
   - Trackpad: .875 / 1600
   - MX Vertical: 0 / 1800
-- Enable unnaturalscrollwheels
-- Enable Rectangle and reconfigure
+- Set SteerMouse settings:
+  - Reverse scroll wheel for mouse
+- Start rectangle 
