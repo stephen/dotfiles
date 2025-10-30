@@ -1,0 +1,77 @@
+#!/bin/bash
+
+# Parse arguments
+CHECK_ONLY=false
+PORT=""
+
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --check)
+            CHECK_ONLY=true
+            shift
+            ;;
+        *)
+            if [ -z "$PORT" ]; then
+                PORT=$1
+            fi
+            shift
+            ;;
+    esac
+done
+
+# Check if port number is provided
+if [ -z "$PORT" ]; then
+    echo "Usage: killport [--check] <port>"
+    echo "Examples:"
+    echo "  killport 8000        # Kill processes on port 8000"
+    echo "  killport --check 8000 # Check what's running on port 8000"
+    exit 1
+fi
+
+# Validate that the argument is a number
+if ! [[ "$PORT" =~ ^[0-9]+$ ]]; then
+    echo "Error: Port must be a number"
+    exit 1
+fi
+
+echo "Finding processes on port $PORT..."
+
+# Find processes using the port
+# lsof -i :PORT lists all processes using that port
+# -t flag returns only PIDs
+PIDS=$(lsof -ti :$PORT 2>/dev/null)
+
+if [ -z "$PIDS" ]; then
+    echo "No processes found running on port $PORT"
+    exit 0
+fi
+
+# Show what processes are on the port
+echo "Found the following processes on port $PORT:"
+lsof -i :$PORT
+
+# If check-only mode, exit here
+if [ "$CHECK_ONLY" = true ]; then
+    exit 0
+fi
+
+# Kill the processes
+echo -e "\nKilling processes: $PIDS"
+for PID in $PIDS; do
+    kill -9 $PID 2>/dev/null
+    if [ $? -eq 0 ]; then
+        echo "Successfully killed process $PID"
+    else
+        echo "Failed to kill process $PID (may require sudo)"
+    fi
+done
+
+# Verify processes are killed
+sleep 0.5
+REMAINING=$(lsof -ti :$PORT 2>/dev/null)
+if [ -z "$REMAINING" ]; then
+    echo "Port $PORT is now free"
+else
+    echo "Warning: Some processes may still be running on port $PORT"
+    echo "Try running with sudo: sudo killport $PORT"
+fi
