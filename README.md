@@ -8,7 +8,7 @@ git clone https://github.com/stephen/dotfiles.git
 ## Other manual followup
 - Set CursorSense settings:
   - Trackpad: .875 / 1600
-  - MX Vertical: 0 / 1800
+  - MX Vertical: 0 / 1650
 - Set SteerMouse settings:
   - Reverse scroll wheel for mouse
 - Start rectangle 
