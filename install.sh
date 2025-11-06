@@ -85,6 +85,7 @@ run brew bundle -v --file=- <<-EOF
 
   tap "spotify/public"
   cask "spotify"
+  cask "claude-code"
 
   cask "google-chrome"
 
